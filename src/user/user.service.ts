@@ -5,9 +5,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
-  private readonly baseUrl = this.configService.get<string>(
-    'spotifyApi.baseUrl',
-  );
+  private readonly apiUrl = this.configService.get<string>('spotifyApi.apiUrl');
 
   constructor(
     private readonly configService: ConfigService,
@@ -16,7 +14,7 @@ export class UserService {
 
   getUser(token: string): any {
     return this.httpService
-      .get<any>(`${this.baseUrl}/v1/me`, {
+      .get<any>(`${this.apiUrl}/v1/me`, {
         headers: { Authorization: token },
       })
       .pipe(map(({ data }) => data));
@@ -24,7 +22,7 @@ export class UserService {
 
   getFollowingArtists(token: string): any {
     return this.httpService
-      .get<any>(`${this.baseUrl}/v1/me/following`, {
+      .get<any>(`${this.apiUrl}/v1/me/following`, {
         headers: { Authorization: token },
         params: { type: 'artist' },
       })
@@ -33,7 +31,7 @@ export class UserService {
 
   getFollowingPlaylists(token: string): any {
     return this.httpService
-      .get<any>(`${this.baseUrl}/v1/me/following`, {
+      .get<any>(`${this.apiUrl}/v1/me/following`, {
         headers: { Authorization: token },
         params: { type: 'artist' },
       })
@@ -42,7 +40,7 @@ export class UserService {
 
   getTopArtists(token: string): any {
     return this.httpService
-      .get<any>(`${this.baseUrl}/v1/me/top/artists`, {
+      .get<any>(`${this.apiUrl}/v1/me/top/artists`, {
         headers: { Authorization: token },
       })
       .pipe(map(({ data }) => data));
@@ -50,7 +48,7 @@ export class UserService {
 
   getTopTracks(token: string): any {
     return this.httpService
-      .get<any>(`${this.baseUrl}/v1/me/top/tracks`, {
+      .get<any>(`${this.apiUrl}/v1/me/top/tracks`, {
         headers: { Authorization: token },
       })
       .pipe(map(({ data }) => data));
@@ -58,7 +56,7 @@ export class UserService {
 
   getPlaylists(token: string): any {
     return this.httpService
-      .get<any>(`${this.baseUrl}/v1/me/playlists`, {
+      .get<any>(`${this.apiUrl}/v1/me/playlists`, {
         headers: { Authorization: token },
       })
       .pipe(map(({ data }) => data));
